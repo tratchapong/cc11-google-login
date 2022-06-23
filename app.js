@@ -8,7 +8,6 @@ require('./passportConfig')(passport)
 const app = express()
 
 app.use(cors())
-app.use(passport.initialize());
 
 // Redirect the user to the Google signin page 
 app.get(
@@ -22,13 +21,9 @@ app.get(
   (req, res) => {
     console.log(req.user);
     res.send("Welcome  " + req.user.email)
-  // res.redirect("/profile/");
   }
  );
-// profile route after successful sign inem> 
- app.get("/profile", (req, res) => {
-  res.send("Welcome");
- });
 
-app.listen(8080, ()=> console.log('Server run on 8080'))
+let port = process.env.PORT
+app.listen(port, ()=> console.log('Server run on port:', port))
 
